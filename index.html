@@ -8,6 +8,9 @@
   <script src="./ajax.js"></script>
   <title>Document</title>
   <style>
+    p {
+      margin: 0px;
+    }
     table {
       border-collapse: collapse;
       border:none;
@@ -45,9 +48,8 @@
     #hide-box {
       position: absolute;
       width: 340px;
-      height: 200px;
+      height: 120px;
       left: 0;
-      left: 0; 
       right: 0; 
       top: 0; 
       bottom: 0;
@@ -55,7 +57,47 @@
       background-color: #ffffff;
       display: block;
       z-index: 3;
-     }
+      border-radius: 5px;
+      padding: 20px;
+      text-align: right;
+    }
+    .hide-box-top {
+      font-size: 16px;
+    }
+    .hide-box-middle {
+      text-align: left;
+      margin: 5px 0px;
+    }
+    .hide-box-bottom {
+      margin: 10px 0px;
+    }
+    .hide-box-text {
+      margin-left: 40px;
+    }
+    .assert-btn {
+      background-color: #3080FE;
+      border: 1px solid #000000;
+    }
+    .cancel-btn {
+      background-color: #FFFFFF;
+      color: #000000;
+      border: 1px solid #000000;
+    }
+    .hide-box-title {
+      line-height: 24px;
+      color: #333;
+      font-size: 20px;
+    }
+    .hide-box-content {
+      color: #666;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    .icon-wenhao-basic {
+      position: absolute;
+      color: #F1C826;
+      font-size: 24px;
+    }
     #show-card {
       width: 100%;
       display: flex;
@@ -122,10 +164,20 @@
   <div id="main">
     <div id="hide-window"></div>
     <div id="hide-box">
-      <p>提示</p>
-      <p>确认删除该项目吗？</p>
-      <button>确认</button>
-      <button>取消</button>
+      <div class="hide-box-top">
+        <span class="iconfont icon-guanbi"></span>
+      </div>
+      <div class="hide-box-middle">
+        <span class="iconfont icon-wenhao icon-wenhao-basic"></span>
+        <div class="hide-box-text">
+          <p class="hide-box-title">提示</p>
+          <p class="hide-box-content">确认删除该项目吗？</p>
+        </div>
+      </div>
+      <div class="hide-box-bottom">
+        <button class="assert-btn">确认</button>
+        <button class="cancel-btn">取消</button>
+      </div>
     </div>   
     <div id="show-card">
       <div class="card-basic alltask-card">
