@@ -16,7 +16,7 @@
     }
     table td, th {
       padding: 10px 10px;
-      border-bottom: 1px solid #DCDEE3;
+      border-bottom: 1px solid rgb(220, 222, 227);
     }
     thead tr {
       background-color:rgb(235, 236, 240);
@@ -181,11 +181,27 @@
           <td nowrap>${cur.name}</td>
           <td>${cur.description}</td>
           <td nowrap>${cur.endTime}</td>
-          <td nowrap>${cur.status}</td>
+          <td nowrap style = "color:${getStatusColor(cur.status)}">${cur.status}</td>
           <td><input type="button" value="删除"/></td>
         </tr>
         `
       },'')
+    }
+    //change status to right color
+    function getStatusColor(status) {
+      var statusColor;
+      switch (status) {
+        case "ACTIVE":
+          statusColor = "#666666";
+          break;
+        case "PENDING":
+          statusColor = "#ee706d";
+          break;
+        case "CLOSED":
+          statusColor = "#f7da47";
+          break;
+      }
+      return statusColor;
     }
   </script>
 </body>
