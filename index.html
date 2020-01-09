@@ -175,7 +175,7 @@
         </div>
       </div>
       <div class="hide-box-bottom">
-        <button class="assert-btn">确认</button>
+        <button class="assert-btn" onclick="closeWindow();deleteItemData()">确认</button>
         <button class="cancel-btn" onclick="closeWindow()">取消</button>
       </div>
     </div>   
@@ -245,11 +245,13 @@
   <script>
     var hideWindow = document.getElementById("hide-window");
     var hideBox = document.getElementById("hide-box");
+    var tableMain = document.getElementById("table-main");
+    var Itemid;
     window.onload = function() {
-      var tableMain = document.getElementById("table-main");
       getListData();
       tableMain.addEventListener("click",function(event) {
         var clickTarget = event.target;
+        Itemid = clickTarget.parentElement.parentElement.getAttribute("data-id");
         if (clickTarget.tagName === "BUTTON") {
           showPopWindow();
         }
@@ -308,6 +310,24 @@
     function closeWindow() {
       hideWindow.style.display = "none";
       hideBox.style.display = "none";  
+    }
+    function deleteItemData() {
+      var options = {
+        url: "http://localhost:3000/projects" + "/" + Itemid,
+        method: "DELETE",
+        data: "",
+        success: function() {
+          deleteItem();
+        },
+        error: function(error) {
+          console.log("error",error);
+        }
+      }
+      ajax(options);
+    }
+    function deleteItem() {
+      var item = tableMain.querySelector(`tr[data-id="${Itemid}"]`);
+      tableMain.removeChild(item);
     }
   </script>
 </body>
