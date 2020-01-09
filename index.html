@@ -33,6 +33,29 @@
       margin: 0 auto;
       font-family: serif,"Microsoft";
     }
+    #hide-window {
+      position: fixed;
+      background-color: #000;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+      display: block;
+      z-index: 2;
+    }
+    #hide-box {
+      position: absolute;
+      width: 340px;
+      height: 200px;
+      left: 0;
+      left: 0; 
+      right: 0; 
+      top: 0; 
+      bottom: 0;
+      margin: auto;
+      background-color: #ffffff;
+      display: block;
+      z-index: 3;
+     }
     #show-card {
       width: 100%;
       display: flex;
@@ -95,8 +118,15 @@
     }
   </style>
 </head>
-<body>
+<body>  
   <div id="main">
+    <div id="hide-window"></div>
+    <div id="hide-box">
+      <p>提示</p>
+      <p>确认删除该项目吗？</p>
+      <button>确认</button>
+      <button>取消</button>
+    </div>   
     <div id="show-card">
       <div class="card-basic alltask-card">
         <span class="iconfont icon-xiangmu icon-basic"></span>
@@ -162,7 +192,14 @@
   </div>
   <script>
     window.onload = function() {
+      var tableMain = document.getElementById("table-main");
       getListData();
+      tableMain.addEventListener("click",function(event) {
+        var clickTarget = event.target;
+        if (clickTarget.tagName === "BUTTON") {
+          layer.confirm()
+        }
+      })
     }
     //send "GET" to database, when success, run renderListData
     function getListData() {
@@ -182,7 +219,6 @@
     // render listdata
     function renderListData(data) {
       var tableMain = document.getElementById("table-main");
-      var deleteBtnStyle;
       tableMain.innerHTML = data.reduce((acc,cur) => {
         return acc += `
         <tr data-id = "${cur.id}">
@@ -210,6 +246,10 @@
           break;
       }
       return statusColor;
+    }
+    //pop a delete window 
+    function deleteItem(event) {
+      console.log(event.target);
     }
   </script>
 </body>
