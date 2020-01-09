@@ -165,7 +165,7 @@
     <div id="hide-window"></div>
     <div id="hide-box">
       <div class="hide-box-top">
-        <span class="iconfont icon-guanbi"></span>
+        <span class="iconfont icon-guanbi"  onclick="closeWindow()"></span>
       </div>
       <div class="hide-box-middle">
         <span class="iconfont icon-wenhao icon-wenhao-basic"></span>
@@ -176,7 +176,7 @@
       </div>
       <div class="hide-box-bottom">
         <button class="assert-btn">确认</button>
-        <button class="cancel-btn">取消</button>
+        <button class="cancel-btn" onclick="closeWindow()">取消</button>
       </div>
     </div>   
     <div id="show-card">
@@ -304,6 +304,10 @@
     function showPopWindow() {
       hideWindow.style.display = "block";
       hideBox.style.display = "block";
+    }
+    function closeWindow() {
+      hideWindow.style.display = "none";
+      hideBox.style.display = "none";  
     }
   </script>
 </body>
