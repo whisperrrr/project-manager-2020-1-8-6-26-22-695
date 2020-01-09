@@ -42,7 +42,7 @@
       width: 100%;
       height: 100%;
       opacity: 0.6;
-      display: block;
+      display: none;
       z-index: 2;
     }
     #hide-box {
@@ -55,7 +55,7 @@
       bottom: 0;
       margin: auto;
       background-color: #ffffff;
-      display: block;
+      display: none;
       z-index: 3;
       border-radius: 5px;
       padding: 20px;
@@ -243,13 +243,15 @@
     </div>
   </div>
   <script>
+    var hideWindow = document.getElementById("hide-window");
+    var hideBox = document.getElementById("hide-box");
     window.onload = function() {
       var tableMain = document.getElementById("table-main");
       getListData();
       tableMain.addEventListener("click",function(event) {
         var clickTarget = event.target;
         if (clickTarget.tagName === "BUTTON") {
-          layer.confirm()
+          showPopWindow();
         }
       })
     }
@@ -299,9 +301,9 @@
       }
       return statusColor;
     }
-    //pop a delete window 
-    function deleteItem(event) {
-      console.log(event.target);
+    function showPopWindow() {
+      hideWindow.style.display = "block";
+      hideBox.style.display = "block";
     }
   </script>
 </body>
