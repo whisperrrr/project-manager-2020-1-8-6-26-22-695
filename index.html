@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <script src="./ajax.js"></script>
   <title>Document</title>
   <style>
     #main {
       width: 95%;
       margin: 0 auto;
+      font-family: serif,"Microsoft";
     }
     #show-card {
       width: 100%;
@@ -28,12 +30,12 @@
     }
     .card-left {
       display: inline-block;
-      width: 49%;
+      width: 48%;
       text-align: left;
     }
     .card-right {
       display: inline-block;
-      width: 49%;
+      width: 48%;
       text-align: right;
     }
     .card-title {
@@ -119,8 +121,56 @@
       </div>
     </div>
     <div id="item-list">
-
+      <h2>项目列表</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>项目名称</th>
+            <th>项目描述</th>
+            <th>截止时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="table-main">
+        </tbody>
+      </table>
     </div>
   </div>
+  <script>
+    window.onload = function() {
+      getListData();
+    }
+    //send "GET" to database, when success, run renderListData
+    function getListData() {
+      var options = {
+        url: "http://localhost:3000/projects",
+        method: "GET",
+        data: "",
+        success: function(result) {
+          renderListData(result);
+        },
+        error: function(error) {
+          console.log("error",error);
+        }
+      }
+      ajax(options);
+    }
+    // render listdata
+    function renderListData(data) {
+      var tableMain = document.getElementById("table-main");
+      tableMain.innerHTML = data.reduce((acc,cur) => {
+        return acc += `
+        <tr>
+          <td>${cur.name}</td>
+          <td>${cur.description}</td>
+          <td>${cur.endTime}</td>
+          <td>${cur.status}</td>
+          <td><input type="button" value="删除"/></td>
+        </tr>
+        `
+      },'')
+    }
+  </script>
 </body>
 </html>
