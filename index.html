@@ -8,8 +8,21 @@
   <script src="./ajax.js"></script>
   <title>Document</title>
   <style>
+    table {
+      border-collapse: collapse;
+      border:none;
+      font-family:"微软雅黑","黑体","宋体";
+      font-size:14px;
+    }
+    table td, th {
+      padding: 10px 10px;
+      border-bottom: 1px solid #DCDEE3;
+    }
+    thead tr {
+      background-color:rgb(235, 236, 240);
+    }
     #main {
-      width: 95%;
+      width: 100%;
       margin: 0 auto;
       font-family: serif,"Microsoft";
     }
@@ -69,6 +82,9 @@
       right: 10px;
       font-size: 100px;
       opacity: 0.3;
+    }
+    #item-list {
+      padding: 10px;
     }
   </style>
 </head>
@@ -161,11 +177,11 @@
       var tableMain = document.getElementById("table-main");
       tableMain.innerHTML = data.reduce((acc,cur) => {
         return acc += `
-        <tr>
-          <td>${cur.name}</td>
+        <tr data-id = "${cur.id}">
+          <td nowrap>${cur.name}</td>
           <td>${cur.description}</td>
-          <td>${cur.endTime}</td>
-          <td>${cur.status}</td>
+          <td nowrap>${cur.endTime}</td>
+          <td nowrap>${cur.status}</td>
           <td><input type="button" value="删除"/></td>
         </tr>
         `
