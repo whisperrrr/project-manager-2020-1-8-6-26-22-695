@@ -171,6 +171,9 @@
       margin: 10px;
       padding: 0px;
     }
+    .transparent {
+      color: transparent;
+    }
   </style>
 </head>
 <body>  
@@ -201,7 +204,7 @@
         </div>      
         <div class="card-right">
           <span class="card-title real-time">实时</span>
-          <p class="card-num"></p>
+          <p class="card-num transparent"></p>
         </div>
       </div>
       <div id="unsettle-card" class="card-basic">
@@ -307,6 +310,7 @@
     function changeShowcard(statusObj) {
       var showCard = document.getElementById("show-card");
       var taskCardNum = showCard.querySelectorAll(".card-num");
+      var taskCardNumLenght = taskCardNum.length;
       var all = 0;
       var taskNumArr = [];  
       for (sta in statusObj) {
@@ -315,7 +319,7 @@
       }
       taskNumArr.unshift(all);
 
-      for (var i = 0; i < 8;) {
+      for (var i = 0; i < taskCardNumLenght;) {
         taskCardNum[i].innerHTML = taskNumArr[Math.floor(i/2)];
         taskCardNum[i + 1].innerHTML = toPercent(taskNumArr[Math.floor(i/2)] / all);
         i += 2;
