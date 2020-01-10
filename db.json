@@ -1,48 +1,6 @@
 {
   "projects": [
     {
-      "id": 4,
-      "name": "retrofit",
-      "endTime": "2018-12-04",
-      "description": "Retrofit 是 Square 公司出品的 HTTP 请求库, 同时是 Square 是最早开源项目之一, Retrofit 是目前 Android 最流行的 Http Client 库之一, 目前版本是 Retrofit2.0 Beta4, 越来越多 Android 开发者开始使用这个请求库了",
-      "status": "ACTIVE"
-    },
-    {
-      "id": 5,
-      "name": "okhttp",
-      "endTime": "2018-12-05",
-      "description": "OkHttp 是 Square 公司出品的 HTTP 另一个请求库, Google 不推荐人们使用 HttpClient, 可是 HttpURLConnection 实在是太难用了, 因此很多人使用了 OkHttp 来解决这问题, 据说 Android4.4 的源码中可以看到 HttpURLConnection 已经替换成 OkHttp 实现呢",
-      "status": "ACTIVE"
-    },
-    {
-      "id": 6,
-      "name": "picasso",
-      "endTime": "2018-12-06",
-      "description": "Picasso 是 Square 公司出品的一款图片缓存库, 主导者是 JakeWharton 大神",
-      "status": "CLOSED"
-    },
-    {
-      "id": 7,
-      "name": "SlidingMenu(不建议使用)",
-      "endTime": "2018-12-07",
-      "description": "一个侧滑菜单开源库, 在 Google 自己原生态的侧滑菜单 NavigationDrawer 没有出现之前, 这个库就已经被广泛使用, 可是到现在这个库已经被放弃了",
-      "status": "ACTIVE"
-    },
-    {
-      "id": 8,
-      "name": "android-best-practices",
-      "endTime": "2018-12-08",
-      "description": "Android 开发最佳实践, 里面所介绍的经验都是来自于 Futurice 公司 Android 开发者, 介绍内容有 Android 开发规范, 架构, 布局技巧, 以及使用一些有助于快速开发相关工具等等, 非常适合新手去学习",
-      "status": "CLOSED"
-    },
-    {
-      "id": 9,
-      "name": "EventBus",
-      "endTime": "2018-12-09",
-      "description": "EventBus 是 Android 事件管理总线, 使用它可以替带 Android BroadCast, BroadCastReceiver, Handler 在 Activity, Fragment, Service, 线程之间传递消息, 大大简化了事件传递逻辑",
-      "status": "PENDING"
-    },
-    {
       "id": 10,
       "name": "android-async-http",
       "endTime": "2018-12-10",

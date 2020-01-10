@@ -137,16 +137,16 @@
       padding: 5px;
       border-radius: 5px;
     }
-    .alltask-card {
+    #alltask-card {
       background-color: rgb(49, 180, 141);
     }
-    .unsettle-card {
+    #unsettle-card {
       background-color: rgb(56, 161, 242);
     }
-    .processing-card {
+    #processing-card {
       background-color: rgb(117, 56, 199);
     }
-    .settled-card {
+    #settled-card {
       background-color: rgb(59, 103, 164);
     }
     .icon-basic {
@@ -180,48 +180,48 @@
       </div>
     </div>   
     <div id="show-card">
-      <div class="card-basic alltask-card">
+      <div id="alltask-card" class="card-basic">
         <span class="iconfont icon-xiangmu icon-basic"></span>
         <div class="card-left">
           <p class="card-title">所有任务</p>
-          <p class="card-num">3,841</p>
+          <p class="card-num"></p>
         </div>      
         <div class="card-right">
           <span class="card-title real-time">实时</span>
-          <p class="card-num">100%</p>
+          <p class="card-num"></p>
         </div>
       </div>
-      <div class="card-basic unsettle-card">
+      <div id="unsettle-card" class="card-basic">
         <span class="iconfont icon-weijiejue icon-basic"></span>
         <div class="card-left">
           <p class="card-title">未解决</p>
-          <p class="card-num">2,305</p>
+          <p class="card-num"></p>
         </div>
         <div class="card-right">
           <span class="card-title real-time">实时</span>
-          <p class="card-num">60%</p>
+          <p class="card-num"></p>
         </div>
       </div>
-      <div class="card-basic processing-card">
+      <div id="processing-card" class="card-basic">
         <span class="iconfont icon-loudou icon-basic"></span>
         <div class="card-left">
           <p class="card-title">处理中</p>
-          <p class="card-num">384</p>
+          <p class="card-num"></p>
         </div>
         <div class="card-right">
           <span class="card-title real-time">实时</span>
-          <p class="card-num">10%</p>
+          <p class="card-num"></p>
         </div>
       </div>
-      <div class="card-basic settled-card"> 
+      <div id="settled-card" class="card-basic"> 
         <span class="iconfont icon-yijiejue2 icon-basic"></span>
         <div class="card-left">
           <p class="card-title">已解决</p>
-          <p class="card-num">1,152</p>
+          <p class="card-num"></p>
         </div>
         <div class="card-right">
           <span class="card-title real-time">实时</span>
-          <p class="card-num">30%</p>
+          <p class="card-num"></p>
         </div>
       </div>
     </div>
@@ -251,8 +251,8 @@
       getListData();
       tableMain.addEventListener("click",function(event) {
         var clickTarget = event.target;
-        Itemid = clickTarget.parentElement.parentElement.getAttribute("data-id");
         if (clickTarget.tagName === "BUTTON") {
+          Itemid = clickTarget.parentElement.parentElement.getAttribute("data-id");
           showPopWindow();
         }
       })
@@ -275,7 +275,9 @@
     // render listdata
     function renderListData(data) {
       var tableMain = document.getElementById("table-main");
+      var statusObj = {"ACTIVE":0,"PENDING":0,"CLOSED":0};
       tableMain.innerHTML = data.reduce((acc,cur) => {
+        statusObj[cur.status] += 1;
         return acc += `
         <tr data-id = "${cur.id}">
           <td nowrap>${cur.name}</td>
@@ -286,6 +288,31 @@
         </tr>
         `
       },'')
+      changeShowcard(statusObj);
+    }
+    //change data in showcard
+    function changeShowcard(statusObj) {
+      var showCard = document.getElementById("show-card");
+      var taskCardNum = showCard.querySelectorAll(".card-num");
+      var all = 0;
+      var taskNumArr = [];  
+      for (sta in statusObj) {
+        all += statusObj[sta];
+        taskNumArr.unshift(statusObj[sta]);
+      }
+      taskNumArr.unshift(all);
+
+      for (var i = 0; i < 8;) {
+        taskCardNum[i].innerHTML = taskNumArr[Math.floor(i/2)];
+        taskCardNum[i + 1].innerHTML = toPercent(taskNumArr[Math.floor(i/2)] / all);
+        i += 2;
+      }
+    }
+    // 转换百分数保留两位小数
+    function toPercent(point){
+      var str=Number(point*100).toFixed(2);
+      str+="%";
+      return str;
     }
     //change status to right color
     function getStatusColor(status) {
@@ -303,14 +330,17 @@
       }
       return statusColor;
     }
+    //when click delete button , pop window
     function showPopWindow() {
       hideWindow.style.display = "block";
       hideBox.style.display = "block";
     }
+    //close pop window
     function closeWindow() {
       hideWindow.style.display = "none";
       hideBox.style.display = "none";  
     }
+    //when click assert in pop window,send delete request to database
     function deleteItemData() {
       var options = {
         url: "http://localhost:3000/projects" + "/" + Itemid,
@@ -325,6 +355,7 @@
       }
       ajax(options);
     }
+    //deleteItem
     function deleteItem() {
       var item = tableMain.querySelector(`tr[data-id="${Itemid}"]`);
       tableMain.removeChild(item);
