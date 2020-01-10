@@ -56,7 +56,7 @@ function changeShowcard(statusObj) {
     all += statusObj[sta];
     taskNumArr.unshift(statusObj[sta]);
   }
-  taskNumArr.unshift(all);
+  taskNumArr.unshift(all); //[all,unsettle,processing,settled]
 
   for (var i = 0; i < taskCardNumLenght;) {
     taskCardNum[i].innerHTML = taskNumArr[Math.floor(i/2)];
@@ -66,8 +66,8 @@ function changeShowcard(statusObj) {
 }
 // turn number into 100%
 function toPercent(point){
-  var str=Number(point*100).toFixed(2);
-  str+="%";
+  var str = Number(point*100).toFixed(2);
+  str += "%";
   return str;
 }
 //change status to right color
